@@ -1,0 +1,14 @@
+CFLAGS=-c -Wall -O2
+LIBS= -lccs811 -lpthread -lm
+
+all: ccs811demo
+
+ccs811demo: make_demo main.o
+	$(CC) main.o $(LIBS) -o ccs811demo
+
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
+
+clean:
+	rm *o ccs811demo
+
