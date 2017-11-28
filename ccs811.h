@@ -25,6 +25,7 @@
 // Opens a file system handle to the I2C device
 // Starts the 'app' in the CCS811 microcontroller
 // into continuous mode to read values every second
+// returns 0 for success, 1 for error
 //
 int ccs811Init(int iChannel, int iAddr);
 

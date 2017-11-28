@@ -32,6 +32,7 @@ static int file_i2c = -1;
 // Opens a file system handle to the I2C device
 // Starts the 'app' in the CCS811 microcontroller
 // into continuous mode to read values every second
+// Returns 0 for success, 1 for failure
 //
 int ccs811Init(int iChannel, int iAddr)
 {
@@ -43,14 +44,14 @@ char filename[32];
 	if ((file_i2c = open(filename, O_RDWR)) < 0)
 	{
 		fprintf(stderr, "Failed to open the i2c bus; run as sudo?\n");
-		return 0;
+		return 1;
 	}
 
 	if (ioctl(file_i2c, I2C_SLAVE, iAddr) < 0)
 	{
 		fprintf(stderr, "Failed to acquire bus access or talk to slave\n");
 		file_i2c = 0;
-		return 0;
+		return 1;
 	}
 
 	ucTemp[0] = 0x20; // HW_ID (read the Hardware ID)
@@ -60,7 +61,7 @@ char filename[32];
 	{
 		printf("Error, ID doesn't match 0x81; wrong device?\n");
 		printf("Value returned = %02x\n", ucTemp[0]);
-		return 0;
+		return 1;
 	}
 
 	ucTemp[0] = 0xf4; // APP_START
@@ -72,7 +73,7 @@ char filename[32];
 		rc = write(file_i2c, ucTemp, 2);
 		if (rc != 2) {} // suppress compiler warning
 	}
-	return 1;
+	return 0;
 
 } /* ccs811Init() */
 

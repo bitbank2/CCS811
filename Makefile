@@ -11,4 +11,4 @@ ccs811.o: ccs811.c
 	$(CC) $(CFLAGS) ccs811.c
 
 clean:
-	rm *o libccs811.a
+	rm *.o libccs811.a

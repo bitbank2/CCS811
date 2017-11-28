@@ -10,5 +10,5 @@ main.o: main.c
 	$(CC) $(CFLAGS) main.c
 
 clean:
-	rm *o ccs811demo
+	rm *.o ccs811demo
 

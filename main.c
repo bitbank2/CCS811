@@ -33,7 +33,7 @@ int eCO2, TVOC;
 	// Raspberry Pi's usually use channel 1
 	// Other ARM boards tend to use channel 0
 	i = ccs811Init(0, 0x5B);
-	if (i != 1)
+	if (i != 0)
 	{
 		return -1; // problem - quit
 	}
